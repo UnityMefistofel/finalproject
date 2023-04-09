@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+  <title>Перечень читателей</title>
+  <style>
+    .l-button {
+      min-width: 120px;
+      font-family: Calibri;
+      appearance: auto;
+      border: 0;
+      border-radius: 5px;
+      background: #c194f8;
+      color: #fff;
+      padding: 8px 16px;
+      display: block;
+      margin: 5px auto;
+      /*margin-top: 5px;*/
+      /*margin-bottom: 5px;*/
+      font-size: 15px;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+    }
+    .c-button {
+      min-width: 120px;
+      font-family: Calibri;
+      appearance: auto;
+      border: 0;
+      border-radius: 5px;
+      background: #4676d7;
+      color: #fff;
+      padding: 8px 16px;
+      margin: 5px auto;
+      display: inline-block;
+      max-width: 120px;
+      /*margin-top: 5px;*/
+      /*margin-bottom: 5px;*/
+      font-size: 15px;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .c-button:hover {
+      background: #1d49aa;
+    }
+
+    .c-button:focus {
+      outline: none;
+      box-shadow: 0 0 0 4px #cbd6ee;
+    }
+  </style>
+</head>
+<body>
+
+<h1 align="center">Перечень зарегистрированных читателей:</h1>
+<table width="100%">
+  <tr th:each="person : ${people}">
+    <td width="30%"></td>
+    <td align="center"><a th:href="@{/persons/{id}(id=${person.getId()})}" th:text="${person.toString()}" class="l-button">user</a>
+    <td width="30%"><p th:unless="${person.getBooksCnt() == 0}" th:text="@{Книг на руках: {id}(id=${person.getBooksCnt()})}">books</p></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td align="center" style="border-top: 3px solid black;">
+      <a href="/books" class="c-button">Меню 'Книги'</a>
+      <a href="/persons/create" class="c-button">Новая карточка..</a>
+    </td>
+    <td></td>
+  </tr>
+</table>
+
+</body>
+</html>

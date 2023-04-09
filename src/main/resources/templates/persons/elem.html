@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <title th:text="${person.getFio()}">Читатель</title>
+    <style>
+        .b-button {
+            min-width: 120px;
+            font-family: Calibri;
+            appearance: auto;
+            border: 0;
+            border-radius: 5px;
+            background: #49ce45;
+            color: #fff;
+            padding: 8px 16px;
+            display: block;
+            margin: 5px auto;
+            font-size: 15px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+        .r-button {
+            min-width: 60px;
+            font-family: Calibri;
+            appearance: auto;
+            border: 0;
+            border-radius: 5px;
+            background: #f87f83;
+            color: #fff;
+            padding: 8px 16px;
+            margin: 5px auto;
+            /*margin-top: 5px;*/
+            /*margin-bottom: 5px;*/
+            font-size: 15px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+        .c-button {
+            min-width: 120px;
+            font-family: Calibri;
+            appearance: auto;
+            border: 0;
+            border-radius: 5px;
+            background: #4676d7;
+            color: #fff;
+            padding: 8px 16px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            font-size: 15px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .c-button:hover {
+            background: #1d49aa;
+        }
+
+        .c-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px #cbd6ee;
+        }
+    </style>
+</head>
+<body>
+<h1 align="center" th:text="${person.getFio()}">text</h1>
+<h2 align="center" th:text="@{Год рождения: {id}(id=${person.getBirthyear()})}">text</h2>
+<!--<h2 th:text="@{e-mail: {id}(id=${person.getEmail()})}">text</h2>-->
+<hr/>
+<div th:unless="${person.getBooksCnt() == 0}">
+    <table width="100%">
+        <tr>
+            <td width="30%"></td>
+            <td align="center"><h2 style="margin: 0px 10px; display: block;">Полученные книги:     </h2></td>
+            <td width="30%"></td>
+        </tr>
+        <tr th:each="book : ${books}">
+            <td></td>
+            <td align="center"><a th:href="@{/books/{id}(id=${book.getId()})}" th:text="${book.toString()}" class="b-button">user</a></td>
+            <td><a th:href="@{/books/{id}/return(id=${book.getId()})}" class="r-button">Вернуть</a></td>
+        </tr>
+    </table>
+</div>
+<div th:if="${person.getBooksCnt() == 0}">
+    <table width="100%">
+        <tr>
+            <td width="30%"></td>
+            <td align="center"><h2 style="margin: 0px 10px; display: block;">Нет книг на руках</h2></td>
+            <td width="30%"></td>
+        </tr>
+    </table>
+</div>
+<hr/>
+<div style="display: block; margin: 5px auto; text-align: center;">
+    <a href="/persons" class="c-button"> < Назад </a>
+    <a th:href="@{/persons/{id}/edit(id=${person.getId()})}" class="c-button">Редактировать</a>
+    <a th:href="@{/persons/{id}/delete(id=${person.getId()})}" class="c-button">Удалить</a>
+</div>
+</body>
+</html>
