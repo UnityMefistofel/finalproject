@@ -58,8 +58,9 @@
 <table width="100%">
   <tr th:each="person : ${people}">
     <td width="30%"></td>
-    <td align="center"><a th:href="@{/persons/{id}(id=${person.getId()})}" th:text="${person.toString()}" class="l-button">user</a>
-    <td width="30%"><p th:unless="${person.getBooksCnt() == 0}" th:text="@{Книг на руках: {id}(id=${person.getBooksCnt()})}">books</p></td>
+    <td align="center"><a th:href="@{/persons/{id}(id=${person.getId()})}" th:text="${person.getUsername()}" class="l-button">user</a>
+    <td width="30%"><p th:unless="${person.getBooksOnHand() == 0}" th:text="@{Книг на руках: {cnt}(cnt=${person.getBooksOnHand()})}">books</p></td>
+<!--    <td width="30%"></td>-->
   </tr>
   <tr>
     <td></td>

@@ -35,7 +35,9 @@ public class Book {
 
     private boolean removed;
 
-    public Book() {}
+    public Book() {
+        this.id = Integer.toUnsignedLong(0);
+    }
 
     public Book(String name, int yearOfProduction, String author, String annotation) {
         this.name = name;
@@ -139,4 +141,5 @@ public class Book {
     public void setRemoved(boolean removed) {
         this.removed = removed;
     }
+
 }

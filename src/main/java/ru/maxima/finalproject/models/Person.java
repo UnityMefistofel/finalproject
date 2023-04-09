@@ -34,6 +34,7 @@ public class Person {
     private String removedPerson;
     private boolean removed;
 
+
     public int getAge() {
         return age;
     }
@@ -57,6 +58,7 @@ public class Person {
     public Set<Role> roles;
 
     public Person() {
+        this.id = Integer.toUnsignedLong(0);
     }
 
     public Person(String username, String email, String password) {
@@ -120,5 +122,10 @@ public class Person {
 
     public void setRemoved(boolean removed) {
         this.removed = removed;
+    }
+
+    @Override
+    public String toString() {
+        return username + " " + phoneNumber;
     }
 }

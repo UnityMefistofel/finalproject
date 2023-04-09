@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-    <title th:text="${person.getFio()}">Читатель</title>
+    <title th:text="${person.getUsername()}">Читатель</title>
     <style>
         .b-button {
             min-width: 120px;
@@ -66,25 +66,25 @@
     </style>
 </head>
 <body>
-<h1 align="center" th:text="${person.getFio()}">text</h1>
-<h2 align="center" th:text="@{Год рождения: {id}(id=${person.getBirthyear()})}">text</h2>
+<h1 align="center" th:text="${person.getUsername()}">text</h1>
+<h2 align="center" th:text="@{Год рождения: {id}(id=${person.getAge()})}">text</h2>
 <!--<h2 th:text="@{e-mail: {id}(id=${person.getEmail()})}">text</h2>-->
 <hr/>
-<div th:unless="${person.getBooksCnt() == 0}">
+<div th:unless="${person.getBooksOnHand() == 0}">
     <table width="100%">
         <tr>
             <td width="30%"></td>
             <td align="center"><h2 style="margin: 0px 10px; display: block;">Полученные книги:     </h2></td>
             <td width="30%"></td>
         </tr>
-        <tr th:each="book : ${books}">
+        <tr th:each="book : ${person.getLstBooks()}">
             <td></td>
-            <td align="center"><a th:href="@{/books/{id}(id=${book.getId()})}" th:text="${book.toString()}" class="b-button">user</a></td>
-            <td><a th:href="@{/books/{id}/return(id=${book.getId()})}" class="r-button">Вернуть</a></td>
+            <td align="center"><a th:href="@{/books/{id}(id=${book.getEntity()})}" th:text="${book.toString()}" class="b-button">user</a></td>
+            <td><a th:href="@{/books/{id}/return(id=${book.getLinked()})}" class="r-button">Вернуть</a></td>
         </tr>
     </table>
 </div>
-<div th:if="${person.getBooksCnt() == 0}">
+<div th:if="${person.getBooksOnHand() == 0}">
     <table width="100%">
         <tr>
             <td width="30%"></td>
