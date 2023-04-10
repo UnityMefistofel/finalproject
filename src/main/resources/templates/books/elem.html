@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <title th:text="${book.getName()}">Книга</title>
+    <style>
+        .l-button {
+            min-width: 120px;
+            font-family: Calibri;
+            appearance: auto;
+            border: 0;
+            border-radius: 5px;
+            background: #c194f8;
+            color: #fff;
+            padding: 8px 16px;
+            margin: 5px auto;
+            /*margin-top: 5px;*/
+            /*margin-bottom: 5px;*/
+            font-size: 15px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+        .r-button {
+            min-width: 60px;
+            font-family: Calibri;
+            appearance: auto;
+            border: 0;
+            border-radius: 5px;
+            background: #f87f83;
+            color: #fff;
+            padding: 8px 16px;
+            margin: 5px auto;
+            /*margin-top: 5px;*/
+            /*margin-bottom: 5px;*/
+            font-size: 15px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+        .c-button {
+            min-width: 120px;
+            font-family: Calibri;
+            appearance: auto;
+            border: 0;
+            border-radius: 5px;
+            background: #4676d7;
+            color: #fff;
+            padding: 8px 16px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            font-size: 15px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .c-button:hover {
+            background: #1d49aa;
+        }
+
+        .c-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px #cbd6ee;
+        }
+    </style>
+</head>
+<body>
+<h1 align="center" th:text="${book.getName()}">text</h1>
+<!--<h2 align="center" th:text="@{Автор: {author}(author=${book.getAuthor()})}">text</h2>-->
+<h2 align="center" th:text="${book.getAuthor()}">text</h2>
+<h2 align="center" th:text="@{Год издания: {rY}(rY=${book.getReleaseyear()})}">text</h2>
+<div th:unless="${owner.getId() == null}" style="margin: 0px; display: block; text-align: center">
+    <h2 style="margin: 0px 10px; display: inline-block;">Книга сейчас у:     </h2>
+    <a th:href="@{/persons/{id}(id=${owner.getId()})}" th:text="${owner.toString()}" class="l-button"></a>
+    <a th:href="@{/books/{id}/return(id=${book.getId()})}" class="r-button">Вернуть</a>
+</div>
+<div th:if="${owner.getId() == null}" style="margin: 0px; display: block; text-align: center">
+    <form th:method="POST" th:action="@{/books/giveto}" th:object="${book}">
+        <h2 style="margin: 0px 10px; display: inline-block;">Выдать книгу для читателя:     </h2>
+        <select th:field="*{owner}">
+            <option th:each="pers : ${people}" th:value="${pers.getId}" th:text="${pers.toString()}"></option>
+        </select>
+        <button type="submit" value="Change" class="r-button">Выдать</button>
+        <input type="hidden" id="id" th:attr="name='id'" th:value="${book.getId()}" />
+    </form>
+</div>
+<hr/>
+<div style="display: block; margin: 5px auto; text-align: center;">
+    <a href="/books" class="c-button"> < Назад </a>
+    <a th:href="@{/books/{id}/edit(id=${book.getId()})}" class="c-button">Изменить</a>
+    <a th:href="@{/books/{id}/delete(id=${book.getId()})}" class="c-button">Удалить</a>
+</div>
+</body>
+</html>

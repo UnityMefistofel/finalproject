@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <title>Книга (редактирование)</title>
+    <style>
+        .c-button {
+            max-width: 120px;
+            font-family: Calibri;
+            appearance: auto;
+            border: 0;
+            border-radius: 5px;
+            background: #4676d7;
+            color: #fff;
+            padding: 8px 16px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            font-size: 15px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .c-button:hover {
+            background: #1d49aa;
+        }
+
+        .c-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px #cbd6ee;
+        }
+    </style>
+</head>
+<body>
+<!--<form th:method="POST" th:action="@{/people/{id}(id = ${person.getId()})}" th:object="${person}">-->
+<h1 align="center">Изменение данных о книге:</h1>
+<form th:method="POST" th:action="@{/books/edit}" th:object="${book}">
+    <table align="center">
+        <tr>
+            <td>Название:</td>
+            <td align="center"><input type="text" th:field="*{name}" id="name" width="100%"></td>
+            <td th:text="@{{id}(id = ${book.getId()})}"></td>
+        </tr>
+        <tr>
+            <td>Автор:</td>
+            <td align="center"><input type="text" th:field="*{author}" id="author" width="100%"></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Год издания:</td>
+            <td align="center"><input type="text" th:field="*{releaseyear}" id="releaseyear" width="100%"></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button type="submit" value="Change" class="c-button">Изменить</button>
+                <a th:href="@{/books/{id}(id = ${book.getId()})}" class="c-button" >Отмена</a>
+            </td>
+            <td></td>
+        </tr>
+    </table>
+    <input type="hidden" id="id" th:attr="name='id'" th:value="${book.getId()}" />
+</form>
+</body>
+</html>

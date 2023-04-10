@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <title>Все книги</title>
+    <style>
+        .b-button {
+            min-width: 120px;
+            font-family: Calibri;
+            appearance: auto;
+            border: 0;
+            border-radius: 5px;
+            background: #49ce45;
+            color: #fff;
+            padding: 8px 16px;
+            display: block;
+            margin: 5px auto;
+            font-size: 15px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+        .res-button {
+            min-width: 120px;
+            font-family: Calibri;
+            appearance: auto;
+            border: 0;
+            border-radius: 5px;
+            background: #49ce4599;
+            color: #fff;
+            padding: 8px 16px;
+            display: block;
+            margin: 5px auto;
+            font-size: 15px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .c-button {
+            min-width: 120px;
+            font-family: Calibri;
+            appearance: auto;
+            border: 0;
+            border-radius: 5px;
+            background: #4676d7;
+            color: #fff;
+            padding: 8px 16px;
+            display: inline-block;
+            margin: 5px auto;
+            font-size: 15px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .c-button:hover {
+            background: #1d49aa;
+        }
+
+        .c-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px #cbd6ee;
+        }
+    </style>
+</head>
+<body>
+<h1 align="center">Список книг:</h1>
+<table width="100%">
+<tr th:each="book : ${books}">
+    <td width="30%"></td>
+    <td th:if="${book.getOwner() == 0}" align="center">
+        <a th:href="@{/books/{id}(id=${book.getId()})}" th:text="${book.toString()}" class="b-button">user</a></td>
+    <td th:unless="${book.getOwner() == 0}" align="center">
+        <a th:href="@{/books/{id}(id=${book.getId()})}" th:text="${book.toString()}" class="res-button">user</a></td>
+    <td width="30%"></td>
+</tr>
+<tr>
+    <td width="30%"></td>
+    <td align="center" style="border-top: 3px solid black;">
+        <a href="/persons" class="c-button">Меню 'Читатели'</a>
+        <a href="/books/create" class="c-button">Новая книга..</a>
+    </td>
+    <td width="30%"></td>
+</tr>
+</table>
+<br/>
+
+
+</body>
+</html>
